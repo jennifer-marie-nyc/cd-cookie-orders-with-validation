@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}Change Order{% endblock title %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between mb-4">
+    <h1>Change Order</h1>
+    <p><a href="/cookies">Back to purchases</a></p>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form action="/cookies/edit/{{ order.id }}", method="post">
+            <input type="hidden" name="id" value="{{ order.id }}">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-danger fw-bold">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" value="{{ order.name }}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="cookie_type">Cookie Type</label>
+                <input type="text" name="cookie_type" id = "cookie_type" value="{{ order.cookie_type }}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="num_of_boxes">Number of boxes</label>
+                <input type="number" name="num_of_boxes" id="num_of_boxes" value="{{ order.num_of_boxes }}" class="form-control">
+            </div>
+            <input type="submit" value="Log" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
